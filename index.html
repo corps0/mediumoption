@@ -67,7 +67,7 @@
 
   <div class="form-container">
     <h2>Select your preferred medium</h2>
-    <form action="https://corps0.github.io/completed/" method="POST">
+   <form id="myForm" action="https://formspree.io/f/mkgnndlb" method="POST">
       <label>
         <input type="radio" name="payment_method" value="payoneer" required> Payoneer
       </label>
@@ -87,6 +87,31 @@
       <button type="submit">Submit</button>
     </form>
   </div>
+ <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
 
+            const form = event.target;
+
+            fetch(form.action, {
+                method: form.method,
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect to a different URL
+                    window.location.href = 'https://corps0.github.io/completed/';
+                } else {
+                    alert('There was a problem with your submission.');
+                }
+            })
+            .catch(error => {
+                alert('There was an error: ' + error.message);
+            });
+        });
+    </script>
 </body>
 </html>
